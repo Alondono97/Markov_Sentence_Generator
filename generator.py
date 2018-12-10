@@ -38,15 +38,36 @@ words = {}
 for sentence in sentence_list:
   for i in range(len(sentence)):
     # each 'i' represents a word  in the sentence
-    if i < len(sentence):
-      ''' there is an error here. the first loop goes into an empty dict so it cannot be index.
-      fortwith, the sub dictionary will be empty as well. need a conditional to address this.'''
-      value = words[i].get(words[i+1])
-      if value == None:
-        # if the word has not yet been encountered, make its occurrence 1
-        words[i][words[i+1]] = 1
+    curr_word = sentence[i]
+    # print(curr_word)
+
+    if i < len(sentence) - 1 :
+      #if not the last word in the sentence
+      next_word = sentence[i+1]
+      if curr_word in words:
+        #if the current word has been ecountered before
+        #check to see if the next word has been encountered
+        if next_word in words[curr_word]:
+          #if next word has been encountered increase occurence
+          words[curr_word][next_word] += 1
+        else:
+          #if next word has not been encountered, initialize occurence to 1
+          words[curr_word][next_word] = 1        
       else:
-        # increase occurence of word  
-        words[i][words[i+1]] += 1
+        # if the curr_word has not yet been encountered, make a new instance and make its next_word occurrence == 1
+        words[curr_word] = {}  
+        words[curr_word][next_word] = 1 
+    else:
+      '''
+      if it is the last word in the sentence
+      map the word to a blank space of frequency 1
+      (this is for words that end in a period, for future revisions
+      parse out period earlier, change whitespace to a period and incease frequency every occurence)
+      '''
+      if curr_word in words:
+        words[curr_word][' '] = 1
+      else: 
+        words[curr_word] = {}
+        words[curr_word][' '] = 1 
 
 
