@@ -1,4 +1,5 @@
 import re 
+import numpy as np 
 
 def make_sentence_list(text_string):
   ''''takes a string object, parses it by sentences and
@@ -38,8 +39,7 @@ for sentence in sentence_list:
   for i in range(len(sentence)):
     # each 'i' represents a word  in the sentence
     curr_word = sentence[i]
-    # print(curr_word)
-
+   
     if i < len(sentence) - 1 :
       #if not the last word in the sentence
       next_word = sentence[i+1]
@@ -78,6 +78,29 @@ for word in words:
     words[word][inner_word] = words[word][inner_word]/freq_total #replace occurences with their fraction of the total to get freq
 
 #we are now ready to begin writing the markov chain
+
+sent_len = 0 #length of sentence 
+final_sentence = ''
+
+current_state = 'The' #initial word/state for the markov chain to begin at #generate randomly later
+
+final_sentence += ' ' + current_state #add it to the sentence
+
+while True:
+
+  if current_state != ' ':
+    f_list = list(words[current_state].values()) #list of frequency values corresponding to the next words(state) after the current word(state)
+    s_list = list(words[current_state].keys()) #list of states that map to the frequencies 
+
+    next_state = np.random.choice(s_list, replace=True, p= f_list)
+
+    final_sentence += ' ' + next_state
+
+    current_state = next_state
+  else:
+    break
+
+print(final_sentence)
   
 
 
