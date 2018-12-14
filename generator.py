@@ -1,6 +1,5 @@
 import re 
 
-
 def make_sentence_list(text_string):
   ''''takes a string object, parses it by sentences and
   returns a list of lists. Each sublist consists of a sentence
@@ -33,7 +32,7 @@ with open('A_study_in_scarlet.txt', 'r') as holmes_file:
 sentence_list = make_sentence_list(book_txt)
 # print(sentence_list[0:2])
 
-words = {}
+words = {} #dictionary of dictionaries keeping track of word occurences
 
 for sentence in sentence_list:
   for i in range(len(sentence)):
@@ -69,5 +68,16 @@ for sentence in sentence_list:
       else: 
         words[curr_word] = {}
         words[curr_word][' '] = 1 
+
+#Now we change the occurence number into frequencies by summing the occurences in each sub dictionary
+#then dividing each occurence by the sum
+for word in words:
+  values_list = words[word].values() #get the occurences into a list
+  freq_total = sum(values_list) # sum up occurences 
+  for inner_word in words[word]:
+    words[word][inner_word] = words[word][inner_word]/freq_total #replace occurences with their fraction of the total to get freq
+
+#we are now ready to begin writing the markov chain
+  
 
 
