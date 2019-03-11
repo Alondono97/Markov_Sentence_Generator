@@ -122,11 +122,13 @@ def markov_sentence_generate(freq_dict, first_words):
     else:
       #when the sentence reaches its final word, end the while loop
       break
-
-  print(final_sentence)
+      
+  return final_sentence
+  # print(final_sentence)
 
 
 # ------------------------------------------------------------------------------------------------------------------
+'''
 #OccurencyCorpus object containing an occurency dictionary and a first words list
 parsed_text = generate_occurrence_dict('A_study_in_scarlet.txt') 
 occurency_dict = parsed_text.occ_dict
@@ -135,7 +137,7 @@ sentence_first_words = parsed_text.first_words
 frequency_dict = generate_freq_dict(occurency_dict)
 
 markov_sentence_generate(frequency_dict, sentence_first_words)
-
+'''
 #-------------------------------------------------------------------------------------------------------------------
 
 
