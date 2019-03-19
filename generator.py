@@ -130,7 +130,7 @@ def markov_sentence_generate(freq_dict, first_words):
 # ------------------------------------------------------------------------------------------------------------------
 
 #OccurencyCorpus object containing an occurency dictionary and a first words list
-parsed_text = generate_occurrence_dict('tweet_corpus.txt') 
+parsed_text = generate_occurrence_dict('A_study_in_scarlet.txt')
 occurency_dict = parsed_text.occ_dict
 sentence_first_words = parsed_text.first_words
 
