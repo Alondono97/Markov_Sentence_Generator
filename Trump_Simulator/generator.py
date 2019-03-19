@@ -12,8 +12,8 @@ def make_sentence_list(text_string):
   text_string = text_string.replace('\n', ' ')
   
   # compile regex for parsing by sentences
-  sent_regex = re.compile('[^.]*\.')
-  
+  # sent_regex = re.compile('[^.]*\.')
+  sent_regex = re.compile('(\S.+?[.!?])(?=\s+|$)')
   # initialize iterator for creating a list of sentences
   #itereator lets you loop through the regex matches
   iterator = sent_regex.finditer(text_string)
@@ -21,7 +21,7 @@ def make_sentence_list(text_string):
   matched_text = []
   for match in iterator:
     #split the sentence by white space to 'tokenize' the words
-    #store words as list called 'words'
+    #store words as list called 'words' 
     words = match.group().split()
     matched_text.append(words)
   
@@ -128,16 +128,20 @@ def markov_sentence_generate(freq_dict, first_words):
 
 
 # ------------------------------------------------------------------------------------------------------------------
-'''
+
 #OccurencyCorpus object containing an occurency dictionary and a first words list
-parsed_text = generate_occurrence_dict('A_study_in_scarlet.txt') 
+parsed_text = generate_occurrence_dict('tweet_corpus.txt') 
 occurency_dict = parsed_text.occ_dict
 sentence_first_words = parsed_text.first_words
 
 frequency_dict = generate_freq_dict(occurency_dict)
 
-markov_sentence_generate(frequency_dict, sentence_first_words)
-'''
+tweet = markov_sentence_generate(frequency_dict, sentence_first_words)
+
+while(len(tweet) > 280):
+  tweet = markov_sentence_generate(frequency_dict, sentence_first_words)
+
+print(tweet)
 #-------------------------------------------------------------------------------------------------------------------
 
 
