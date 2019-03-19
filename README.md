@@ -3,7 +3,8 @@ Sentence generator using a markov chain with probabilities garnered from word fr
 
 ## How to use:
 * Fork the repo and run `python3 generator.py`
-* If you cd into the Trump_Simulator directory, it will work the same way
+* If you cd into the Trump_Simulator directory, it will work the same way.
+
 If you want to use a different .txt file, currently you'll have to go into the generator.py file and change the line 
 
 `parsed_text = generate_occurrence_dict(<corpus.txt>)` 
